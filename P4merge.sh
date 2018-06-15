@@ -3,7 +3,7 @@
 #Go to directory for P4
 cd /mnt/c/Program\ Files/Perforce/
 
-#Declare variable and iniate it - Get the no diff output message
+#Declare a variable and iniate it - Get the no diff output message
 STR=$(p4.exe diff2 -qOd //vsd-ptcs/ems/8x/dev_br/EMS8X-3183_emd1/... //vsd-ptcs/ems/8x/dev_br/EMS8X-3183_emd1/...)
 
 #Check diff and assign the output value to STR2
