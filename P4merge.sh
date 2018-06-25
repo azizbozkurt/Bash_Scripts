@@ -16,15 +16,24 @@ if [ "$STR" == "$STR1" ]
 then
    echo The Branch is already UP-TO Date!
 else
-   echo New Changes is Available... Iniatiating Merge...
-   read -p "Do you want to start the Merge Procedure? [y/N] " response
-   response=${response,,}
-   if [[ "$response" =~ ^(yes|y)$ ]]
+   echo New Changes is Available... Iniatiating Merge..
+   read -p "Have you Shelved all opened files in Perforce? [y/N] " answer
+   answer=${answer,,}
+   if [[ "$answer" =~ ^(yes|y)$ ]]
    then
-   p4.exe integ -b EMS8X-3183_emd1
-   p4.exe resolve -as
+      echo The next step will perform Sync, Merge and safe-auto Resolve operations on your workspace
+      read -p "Do you want to start the Merge Procedure? [y/N] " response
+      response=${response,,}
+      if [[ "$response" =~ ^(yes|y)$ ]]
+      then
+	 p4.exe sync
+         p4.exe integ -b EMS8X-3183_emd1
+   	 p4.exe resolve -as
+     else
+         echo Merge procedure aborted
+     fi
    else
-   echo Merge procedure aborted
+   echo Please Shelve the opened files, before starting the Merge!
    fi
 fi
 
